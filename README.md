@@ -1,0 +1,1 @@
+# shopee-openapi-v2
