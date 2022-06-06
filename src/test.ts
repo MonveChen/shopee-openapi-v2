@@ -2,7 +2,7 @@
  * @Author: Monve
  * @Date: 2022-04-08 10:52:47
  * @LastEditors: Monve
- * @LastEditTime: 2022-06-06 14:52:19
+ * @LastEditTime: 2022-06-06 19:23:07
  * @FilePath: /shopee-openapi-v2/src/test.ts
  */
 
@@ -22,7 +22,7 @@ const main = async () => {
   try {
     const url = await shopee.getAuthLink()
     console.log(url)
-    const res = await shopee.chat.getAccesstoken({ code: '55485a58484f724c7963636369546e48', shop_id: 445519300, partner_id: 2003523 })
+    const res = await shopee.getAccesstoken({ code: '55485a58484f724c7963636369546e48', shop_id: 445519300, main_account_id: 445519300, partner_id: 2003523 })
     console.log(res)
 
   } catch (error) {

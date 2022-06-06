@@ -2,12 +2,12 @@
  * @Author: Monve
  * @Date: 2022-03-10 11:46:01
  * @LastEditors: Monve
- * @LastEditTime: 2022-06-06 15:59:29
+ * @LastEditTime: 2022-06-06 19:54:35
  * @FilePath: /shopee-openapi-v2/src/index.ts
  */
 
 import { BASE_URL } from "./utils/const"
-import { axios_service } from "./utils/request"
+import { ApiMethod, axios_service, Post } from "./utils/request"
 import { signRequest } from "./utils/sign"
 import * as queryString from "query-string"
 import { ChatApi } from "./chat"
@@ -103,6 +103,27 @@ class ShopeeOpenApi {
   getUnAuthLink(): string {
     return this.generateLink('/api/v2/shop/cancel_auth_partner')
   }
+
+  @Post({ url: '/api/v2/auth/token/get' })
+  getAccesstoken!: ApiMethod<
+    { code: string, partner_id: number } &
+    ({ shop_id: number } | { main_account_id: number }),
+    {
+      refresh_token: string, access_token: string,
+      expire_in: number, message: string,
+      merchant_id_list?: number[], shop_id_list?: number[]
+    }
+  >
+
+  @Post({ url: '/api/v2/auth/access_token/get' })
+  refreshAccessToken!: ApiMethod<
+    { refresh_token: string },
+    {
+      refresh_token: string, access_token: string,
+      expire_in: number, partner_id: number,
+      shop_id?: number, merchant_id?: number
+    }
+  >
 
 }
 
