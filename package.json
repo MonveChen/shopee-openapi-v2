@@ -1,6 +1,6 @@
 {
   "name": "shopee-openapi-v2",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "shopee open api sdk",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -14,8 +14,8 @@
     "build": "rm -rf ./dist && ./node_modules/.bin/tsc",
     "prepare": "husky install",
     "link": "npm run build && npm link",
-    "publish": "npm run build && npm publish --access=public && npm run sync_taobao",
-    "sync_taobao": "cnpm sync $npm_package_name"
+    "publish_to_npm": "npm run build && npm publish --access=public && npm run sync_taobao",
+    "sync_taobao": "cnpm sync $npm_package_name && open https://npmmirror.com/sync/$npm_package_name"
   },
   "repository": {
     "type": "git",

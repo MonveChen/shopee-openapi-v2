@@ -2,7 +2,7 @@
  * @Author: Monve
  * @Date: 2022-03-10 11:46:01
  * @LastEditors: Monve
- * @LastEditTime: 2022-06-06 15:02:17
+ * @LastEditTime: 2022-06-06 15:59:29
  * @FilePath: /shopee-openapi-v2/src/index.ts
  */
 
@@ -54,8 +54,8 @@ class ShopeeOpenApi {
     )
 
     axios_service.interceptors.response.use((res) => res, (error) => {
-      if (error.response.data) {
-        return error.response.data
+      if (error.response && error.response.data) {
+        return error.response
       }
       throw error
     })
