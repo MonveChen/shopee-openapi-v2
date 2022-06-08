@@ -2,7 +2,7 @@
  * @Author: Monve
  * @Date: 2022-03-10 11:46:01
  * @LastEditors: Monve
- * @LastEditTime: 2022-06-06 19:54:35
+ * @LastEditTime: 2022-06-08 16:08:32
  * @FilePath: /shopee-openapi-v2/src/index.ts
  */
 
@@ -11,6 +11,15 @@ import { ApiMethod, axios_service, Post } from "./utils/request"
 import { signRequest } from "./utils/sign"
 import * as queryString from "query-string"
 import { ChatApi } from "./chat"
+import { ShopApi } from "./shop"
+import { VoucherApi } from "./voucher"
+import { ProductApi } from "./product"
+import { OrderApi } from "./order"
+import { LogisticsApi } from "./logistics"
+import { PaymentApi } from "./payment"
+import { ReturnsApi } from "./returns"
+import { PublicApi } from "./public"
+import { PushApi } from "./push"
 
 interface CONFIG {
   partner_id: string | number,
@@ -24,9 +33,27 @@ class ShopeeOpenApi {
   private partner_key: string
   private is_dev: boolean
   private redirect: string
-  public chat: ChatApi
+  public product = new ProductApi()
+  public shop = new ShopApi()
+  public order = new OrderApi()
+  public logistics = new LogisticsApi()
+  public payment = new PaymentApi()
+  public returns = new ReturnsApi()
+  public public = new PublicApi()
+  public push = new PushApi()
+  public chat = new ChatApi()
+  public vocher = new VoucherApi()
   constructor() {
-    this.chat = new ChatApi()
+    // this.product = new ProductApi()
+    // this.shop = new ShopApi()
+    // this.order = new OrderApi()
+    // this.logistics = new LogisticsApi()
+    // this.payment = new PaymentApi()
+    // this.returns = new ReturnsApi()
+    // this.public = new PublicApi()
+    // this.push = new PushApi()
+    // this.chat = new ChatApi()
+    // this.vocher = new VoucherApi()
     axios_service.interceptors.request.use(
       (config) => {
         if (!config.headers) {
@@ -42,9 +69,9 @@ class ShopeeOpenApi {
         }
         const { timestamp } = system_params
         const { access_token, shop_id } = data
+        delete config.params.access_token
+        delete config.params.shop_id
         config.url = this.generateParamsString(config.url || '', timestamp, access_token, shop_id)
-        config.method === 'get' ? config.params = data
-          : config.data = data
         return config
       },
       error => {
@@ -110,7 +137,7 @@ class ShopeeOpenApi {
     ({ shop_id: number } | { main_account_id: number }),
     {
       refresh_token: string, access_token: string,
-      expire_in: number, message: string,
+      expire_in: number,
       merchant_id_list?: number[], shop_id_list?: number[]
     }
   >

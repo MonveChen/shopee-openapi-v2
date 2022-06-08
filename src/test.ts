@@ -2,7 +2,7 @@
  * @Author: Monve
  * @Date: 2022-04-08 10:52:47
  * @LastEditors: Monve
- * @LastEditTime: 2022-06-06 19:23:07
+ * @LastEditTime: 2022-06-08 16:09:05
  * @FilePath: /shopee-openapi-v2/src/test.ts
  */
 
@@ -16,18 +16,18 @@ const main = async () => {
 
   }
 
-  shopee.setAppConfig({ partner_id: process.env.PARTNER_ID, partner_key: process.env.PARTNER_KEY, is_dev: false, redirect: 'https://dev.dibiaozuitu.com/openapi/shopee/auth_redirect/c932e987fa81e70889e56a20b09df648' })
+  shopee.setAppConfig({ partner_id: process.env.PARTNER_ID, partner_key: process.env.PARTNER_KEY, is_dev: true, redirect: 'https://dev.dibiaozuitu.com/openapi/shopee/auth_redirect/c932e987fa81e70889e56a20b09df648' })
 
-  //授权
-  try {
-    const url = await shopee.getAuthLink()
-    console.log(url)
-    const res = await shopee.getAccesstoken({ code: '55485a58484f724c7963636369546e48', shop_id: 445519300, main_account_id: 445519300, partner_id: 2003523 })
-    console.log(res)
+  // //获取授权链接
+  // const url = await shopee.getAuthLink()
+  // console.log(url)
+  // //获取token
+  // const res = await shopee.getAccesstoken({ code: '55485a58484f724c7963636369546e48', shop_id: 445519300, main_account_id: 445519300, partner_id: 2003523 })
+  // console.log(res)
 
-  } catch (error) {
-    console.log(error)
-  }
+  //获取店铺信息
+  const res2 = await shopee.shop.getShopInfo({ shop_id: 46958, access_token: "4d597476676d4b495a4c6d4b7076557a" })
+  console.log(res2)
 
   // // 获取会话列表
   // const access_token = '50000601317sMk1gvHhri0OdBgbUg18cf3b17luyEHkRmvmrtEDXBtxFuGZ3Bv0z'

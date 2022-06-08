@@ -2,19 +2,26 @@
  * @Author: Monve
  * @Date: 2021-09-26 18:11:06
  * @LastEditors: Monve
- * @LastEditTime: 2022-06-06 13:35:51
+ * @LastEditTime: 2022-06-07 19:47:33
  * @FilePath: /shopee-openapi-v2/src/utils/request.ts
  */
 import axios, { AxiosRequestConfig, AxiosResponse, Method } from "axios";
 
 export const axios_service = axios.create()
 
-type BaseRes = { request_id: string, error: string }
+type BaseRes = { request_id: string, error: string, message: string }
+type ShopReq = { shop_id: number, access_token: string }
 
 export type ApiMethod<T = any, R = any> = (
   data: T,
   option?: AxiosRequestConfig<T>
 ) => Promise<AxiosResponse<BaseRes & R>>
+
+export type ApiShopMethod<T = any, R = any> = (
+  data: ShopReq & T,
+  option?: AxiosRequestConfig<ShopReq & T>
+) => Promise<AxiosResponse<BaseRes & R>>
+
 export function createApiByMethod(method: Method) {
   return function (
     args: AxiosRequestConfig,

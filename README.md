@@ -33,7 +33,7 @@ e.g.
 
 ```typescript
 @Post({ url: '/im/message/send' })
-  send_messages!: ApiMethod<
+  send_messages!: ApiShopMethod<
     {
       access_token: string, template_id: number, session_id: string,
       txt?: string, img_url?: string, width?: number, height?: number,
