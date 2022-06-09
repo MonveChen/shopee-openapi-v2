@@ -59,8 +59,8 @@ class ShopeeOpenApi {
         }
         const { timestamp } = system_params
         const { access_token, shop_id } = data
-        delete config.params.access_token
-        delete config.params.shop_id
+        delete config.params?.access_token
+        delete config.params?.shop_id
         config.url = this.generateParamsString(config.url || '', timestamp, access_token, shop_id)
         return config
       },
