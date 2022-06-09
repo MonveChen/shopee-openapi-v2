@@ -2,7 +2,7 @@
  * @Author: Monve
  * @Date: 2022-04-08 10:52:47
  * @LastEditors: Monve
- * @LastEditTime: 2022-06-08 16:09:05
+ * @LastEditTime: 2022-06-09 13:56:33
  * @FilePath: /shopee-openapi-v2/src/test.ts
  */
 
@@ -16,7 +16,7 @@ const main = async () => {
 
   }
 
-  shopee.setAppConfig({ partner_id: process.env.PARTNER_ID, partner_key: process.env.PARTNER_KEY, is_dev: true, redirect: 'https://dev.dibiaozuitu.com/openapi/shopee/auth_redirect/c932e987fa81e70889e56a20b09df648' })
+  shopee.setAppConfig({ partner_id: process.env.PARTNER_ID, partner_key: process.env.PARTNER_KEY, is_dev: true, redirect: 'https://dev.dibiaozuitu.com/openapi/shopee/auth_redirect/c932e987fa81e70889e56a20b09df648', retries: 3 })
 
   // //获取授权链接
   // const url = await shopee.getAuthLink()

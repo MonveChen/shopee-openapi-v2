@@ -7,7 +7,8 @@ A shopee openapi sdk, currently there is only sdk about im part
 ```typescript
 import shopee from "shopee-openapi-v2"
 
-shopee.setAppConfig({ partner_id: 108334, partner_key: "ZKpigRItsXvnImXfLzuKliOTByAOUhsZ" })
+shopee.setAppConfig({ partner_id: 108334, partner_key: "ZKpigRItsXvnImXfLzuKliOTByAOUhsZ", is_dev: true, redirect: 'xxxx' })
+// retries、retryDelay 可选，用于当error === 'system_busy'时重试，默认retries:0，retryDelay:(retryCount: number) => Math.pow(retryCount, 2) * 1000
 
 //授权
 const res = await shopee.token_create({ code: '0_108334_gr0GkF1EuYdpvrIbqAD6pU7J5318' })

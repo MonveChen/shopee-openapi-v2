@@ -2,11 +2,11 @@
  * @Author: Monve
  * @Date: 2022-03-10 11:46:01
  * @LastEditors: Monve
- * @LastEditTime: 2022-06-08 16:08:32
+ * @LastEditTime: 2022-06-09 13:49:58
  * @FilePath: /shopee-openapi-v2/src/index.ts
  */
 
-import { BASE_URL } from "./utils/const"
+import { api_config, BASE_URL } from "./utils/const"
 import { ApiMethod, axios_service, Post } from "./utils/request"
 import { signRequest } from "./utils/sign"
 import * as queryString from "query-string"
@@ -21,12 +21,12 @@ import { ReturnsApi } from "./returns"
 import { PublicApi } from "./public"
 import { PushApi } from "./push"
 
-interface CONFIG {
+type CONFIG = {
   partner_id: string | number,
   partner_key: string,
   is_dev: boolean,
   redirect: string
-}
+} & Partial<typeof api_config>
 
 class ShopeeOpenApi {
   private partner_id: number
@@ -44,16 +44,6 @@ class ShopeeOpenApi {
   public chat = new ChatApi()
   public vocher = new VoucherApi()
   constructor() {
-    // this.product = new ProductApi()
-    // this.shop = new ShopApi()
-    // this.order = new OrderApi()
-    // this.logistics = new LogisticsApi()
-    // this.payment = new PaymentApi()
-    // this.returns = new ReturnsApi()
-    // this.public = new PublicApi()
-    // this.push = new PushApi()
-    // this.chat = new ChatApi()
-    // this.vocher = new VoucherApi()
     axios_service.interceptors.request.use(
       (config) => {
         if (!config.headers) {
@@ -88,11 +78,16 @@ class ShopeeOpenApi {
     })
   }
 
-  setAppConfig = ({ partner_id, partner_key, is_dev, redirect }: CONFIG) => {
+  setAppConfig = ({
+    partner_id, partner_key, is_dev, redirect, retries = 0,
+    retryDelay = (retryCount: number) => Math.pow(retryCount, 2) * 1000
+  }: CONFIG) => {
     this.partner_id = Number(partner_id)
     this.partner_key = partner_key
     this.is_dev = is_dev
     this.redirect = redirect
+    api_config.retries = retries
+    api_config.retryDelay = retryDelay
   }
 
   private generateParamsString(path: string, timestamp: number, access_token?: string, shop_id?: number): string {

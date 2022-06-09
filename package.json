@@ -1,6 +1,6 @@
 {
   "name": "shopee-openapi-v2",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "shopee open api sdk",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -34,6 +34,7 @@
   },
   "homepage": "https://github.com/MonveChen/shopee-openapi-v2#readme",
   "dependencies": {
+    "@monvechen/sleep": "^1.0.3",
     "axios": "^0.26.1",
     "query-string": "^7.1.1"
   },

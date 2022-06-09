@@ -2,10 +2,12 @@
  * @Author: Monve
  * @Date: 2021-09-26 18:11:06
  * @LastEditors: Monve
- * @LastEditTime: 2022-06-07 19:47:33
+ * @LastEditTime: 2022-06-09 13:57:49
  * @FilePath: /shopee-openapi-v2/src/utils/request.ts
  */
+import { sleep } from "@monvechen/sleep";
 import axios, { AxiosRequestConfig, AxiosResponse, Method } from "axios";
+import { api_config } from "./const";
 
 export const axios_service = axios.create()
 
@@ -25,7 +27,6 @@ export type ApiShopMethod<T = any, R = any> = (
 export function createApiByMethod(method: Method) {
   return function (
     args: AxiosRequestConfig,
-    format?: (res: any, data: any) => any,
     request = axios_service
   ): PropertyDecorator {
     return function (target, name) {
@@ -33,11 +34,20 @@ export function createApiByMethod(method: Method) {
         data = {} as any,
         option?: AxiosRequestConfig<any>
       ) {
-        let dic = { method, ...args, ...option }
+        async function req(dic: any, idx = 0): Promise<AxiosResponse<any, any>> {
+          const result = await request(dic)
+          if (result.data.error === 'system_busy') {
+            if (idx < api_config.retries) {
+              idx++
+              await sleep(api_config.retryDelay(idx))
+              return req(dic, idx)
+            }
+          }
+          return result
+        }
+        const dic = { method, ...args, ...option }
         method === 'get' ? dic.params = data : dic.data = data
-        const result = request(dic).then((res) =>
-          typeof format === 'function' ? format.call(this, res, data) : res
-        )
+        const result = req(dic)
         return result
       }
       return target
