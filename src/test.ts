@@ -2,7 +2,7 @@
  * @Author: Monve
  * @Date: 2022-04-08 10:52:47
  * @LastEditors: Monve
- * @LastEditTime: 2022-06-09 13:56:33
+ * @LastEditTime: 2022-06-09 17:48:00
  * @FilePath: /shopee-openapi-v2/src/test.ts
  */
 
@@ -26,8 +26,11 @@ const main = async () => {
   // console.log(res)
 
   //获取店铺信息
-  const res2 = await shopee.shop.getShopInfo({ shop_id: 46958, access_token: "4d597476676d4b495a4c6d4b7076557a" })
-  console.log(res2)
+  // const res2 = await shopee.shop.getShopInfo({ shop_id: 46958, access_token: "4d597476676d4b495a4c6d4b7076557a" })
+  // console.log(res2)
+
+  const res = await shopee.chat.sendMessage({ to_id: 53079, access_token: '6657505a777a68784561526f71536a59', shop_id: 53075, message_type: 'text', content: { text: 'test' } })
+  console.log(res)
 
   // // 获取会话列表
   // const access_token = '50000601317sMk1gvHhri0OdBgbUg18cf3b17luyEHkRmvmrtEDXBtxFuGZ3Bv0z'

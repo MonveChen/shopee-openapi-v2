@@ -2,13 +2,13 @@
  * @Author: Monve
  * @Date: 2022-06-02 10:28:39
  * @LastEditors: Monve
- * @LastEditTime: 2022-06-07 19:47:59
+ * @LastEditTime: 2022-06-13 14:01:45
  * @FilePath: /shopee-openapi-v2/src/chat.ts
  */
 
 import { ApiShopMethod, Get, Post } from "./utils/request"
 
-type Conversation = {
+export type Conversation = {
   conversation_id: string,
   to_id: number,
   to_name: string,
