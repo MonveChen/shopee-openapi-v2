@@ -2,7 +2,7 @@
  * @Author: Monve
  * @Date: 2022-03-10 11:46:01
  * @LastEditors: Monve
- * @LastEditTime: 2022-06-14 11:27:50
+ * @LastEditTime: 2022-06-14 11:33:07
  * @FilePath: /shopee-openapi-v2/src/index.ts
  */
 
@@ -140,7 +140,7 @@ class ShopeeOpenApi {
   @Post({ url: '/api/v2/auth/access_token/get' })
   refreshAccessToken!: ApiMethod<
     { refresh_token: string, partner_id: number } &
-    ({ shop_id: number } | { main_account_id: number }),
+    ({ shop_id: number } | { merchant_id: number }),
     {
       refresh_token: string, access_token: string,
       expire_in: number, partner_id: number,
