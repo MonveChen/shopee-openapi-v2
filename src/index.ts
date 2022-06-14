@@ -2,7 +2,7 @@
  * @Author: Monve
  * @Date: 2022-03-10 11:46:01
  * @LastEditors: Monve
- * @LastEditTime: 2022-06-14 10:11:13
+ * @LastEditTime: 2022-06-14 11:27:50
  * @FilePath: /shopee-openapi-v2/src/index.ts
  */
 
@@ -29,7 +29,7 @@ type CONFIG = {
 } & Partial<typeof api_config>
 
 class ShopeeOpenApi {
-  private partner_id: number
+  public partner_id: number
   private partner_key: string
   private is_dev: boolean
   private redirect: string
