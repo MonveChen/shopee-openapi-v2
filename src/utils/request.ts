@@ -2,7 +2,7 @@
  * @Author: Monve
  * @Date: 2021-09-26 18:11:06
  * @LastEditors: Monve
- * @LastEditTime: 2022-06-09 13:57:49
+ * @LastEditTime: 2022-06-15 16:35:42
  * @FilePath: /shopee-openapi-v2/src/utils/request.ts
  */
 import { sleep } from "@monvechen/sleep";
@@ -11,8 +11,8 @@ import { api_config } from "./const";
 
 export const axios_service = axios.create()
 
-type BaseRes = { request_id: string, error: string, message: string }
-type ShopReq = { shop_id: number, access_token: string }
+export type BaseRes = { request_id: string, error: string, message: string }
+export type ShopReq = { shop_id: number, access_token: string }
 
 export type ApiMethod<T = any, R = any> = (
   data: T,

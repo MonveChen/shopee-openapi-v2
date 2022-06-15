@@ -2,11 +2,12 @@
  * @Author: Monve
  * @Date: 2022-06-02 10:28:39
  * @LastEditors: Monve
- * @LastEditTime: 2022-06-13 14:01:45
+ * @LastEditTime: 2022-06-15 17:30:17
  * @FilePath: /shopee-openapi-v2/src/chat.ts
  */
 
-import { ApiShopMethod, Get, Post } from "./utils/request"
+import { ApiShopMethod, BaseRes, Get, Post, ShopReq } from "./utils/request"
+import * as FormData from 'form-data'
 
 export type Conversation = {
   conversation_id: string,
@@ -164,15 +165,12 @@ export class ChatApi {
   /**
    * can only support "jpg","jpeg","png","gif". The max size of the file is 2MB
    */
-  @Post({ url: '/api/v2/sellerchat/upload_image' })
-  uploadImage!: ApiShopMethod<
-    { file: File },
-    {
-      response: {
-        url: string, thumbnail: string
-      }
+  uploadImage: (data: { file: FormData } & ShopReq) => Promise<{
+    response: {
+      url: string, thumbnail: string, file_server_id?: number,
+      thumb_height?: number, thumb_width?: number, url_hash?: string
     }
-  >
+  } & BaseRes>;
 
   @Post({ url: '/api/v2/sellerchat/send_autoreply_message' })
   sendAutoreplyMessage!: ApiShopMethod<

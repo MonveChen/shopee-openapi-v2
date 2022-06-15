@@ -2,7 +2,7 @@
  * @Author: Monve
  * @Date: 2022-03-10 11:46:01
  * @LastEditors: Monve
- * @LastEditTime: 2022-06-14 11:33:07
+ * @LastEditTime: 2022-06-15 17:26:24
  * @FilePath: /shopee-openapi-v2/src/index.ts
  */
 
@@ -20,6 +20,7 @@ import { PaymentApi } from "./payment"
 import { ReturnsApi } from "./returns"
 import { PublicApi } from "./public"
 import { PushApi } from "./push"
+import axios, { AxiosResponse } from "axios"
 
 type CONFIG = {
   partner_id: string | number,
@@ -44,6 +45,22 @@ class ShopeeOpenApi {
   public chat = new ChatApi()
   public vocher = new VoucherApi()
   constructor() {
+    const results = [(res: AxiosResponse<any, any>) => res, (error: any) => {
+      if (error.response && error.response.data) {
+        return error.response
+      }
+      throw error
+    }]
+    function tsS() {
+      return Math.round(new Date().getTime() / 1000)
+    }
+    this.chat.uploadImage = ({ shop_id, access_token, file }) => {
+      const url = this.generateParamsString('/api/v2/sellerchat/upload_image', tsS(), access_token, shop_id)
+      return axios.post(url, file, {
+        baseURL: this.is_dev ? BASE_URL.test : BASE_URL.live,
+        headers: { ...file.getHeaders() }
+      }).then(...results)
+    }
     axios_service.interceptors.request.use(
       (config) => {
         if (!config.headers) {
@@ -52,7 +69,7 @@ class ShopeeOpenApi {
         config.headers['Content-Type'] = "application/json"
         config.baseURL = this.is_dev ? BASE_URL.test : BASE_URL.live
         const system_params = {
-          partner_id: this.partner_id, timestamp: Math.round(new Date().getTime() / 1000)
+          partner_id: this.partner_id, timestamp: tsS()
         }
         const data = {
           ...(config.method === 'get' ? config.params : config.data)
@@ -70,12 +87,7 @@ class ShopeeOpenApi {
       }
     )
 
-    axios_service.interceptors.response.use((res) => res, (error) => {
-      if (error.response && error.response.data) {
-        return error.response
-      }
-      throw error
-    })
+    axios_service.interceptors.response.use(...results)
   }
 
   setAppConfig = ({

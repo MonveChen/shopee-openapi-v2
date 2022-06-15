@@ -2,13 +2,13 @@
  * @Author: Monve
  * @Date: 2022-04-08 10:52:47
  * @LastEditors: Monve
- * @LastEditTime: 2022-06-09 17:48:00
+ * @LastEditTime: 2022-06-15 17:29:07
  * @FilePath: /shopee-openapi-v2/src/test.ts
  */
 
-import axios from "axios";
-import { request } from "http";
 import shopee from "./index"
+import * as fs from 'fs'
+import * as FormData from 'form-data'
 
 const main = async () => {
   if (!process.env.PARTNER_ID || !process.env.PARTNER_KEY) {
@@ -29,7 +29,15 @@ const main = async () => {
   // const res2 = await shopee.shop.getShopInfo({ shop_id: 46958, access_token: "4d597476676d4b495a4c6d4b7076557a" })
   // console.log(res2)
 
-  const res = await shopee.chat.sendMessage({ to_id: 53079, access_token: '6657505a777a68784561526f71536a59', shop_id: 53075, message_type: 'text', content: { text: 'test' } })
+  // const res = await shopee.chat.sendMessage({ to_id: 53079, access_token: '6657505a777a68784561526f71536a59', shop_id: 53075, message_type: 'text', content: { text: 'test' } })
+  // console.log(res)
+
+  let file = new FormData();
+  file.append('file', fs.createReadStream('/Users/chenmenghui/Documents/崎玉 2.png') as any)
+  const res = await shopee.chat.uploadImage({
+    shop_id: 45202, access_token: '57565724276745645475a4c475a654b4d',
+    file
+  })
   console.log(res)
 
   // // 获取会话列表
