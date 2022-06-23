@@ -2,13 +2,29 @@
  * @Author: Monve
  * @Date: 2022-06-02 10:28:39
  * @LastEditors: Monve
- * @LastEditTime: 2022-06-15 17:37:55
+ * @LastEditTime: 2022-06-23 18:45:45
  * @FilePath: /shopee-openapi-v2/src/chat.ts
  */
 
 import { ApiShopMethod, BaseRes, Get, Post, ShopReq } from "./utils/request"
 import * as FormData from 'form-data'
 import { AxiosResponse } from "axios"
+
+export type MessageContent = {
+  text: string,
+  translation?: {
+    text: string,
+    source: string,
+    target_language: string,
+    source_language: string
+  },
+  mid?: {
+    text: string,
+    source: string,
+    target_language: string,
+    source_language: string
+  }
+}
 
 export type Conversation = {
   conversation_id: string,
@@ -21,9 +37,7 @@ export type Conversation = {
   last_read_message_id: string,
   latest_message_id: string,
   latest_message_type: string,
-  latest_message_content: {
-    text: string
-  },
+  latest_message_content: MessageContent,
   latest_message_from_id: number,
   last_message_timestamp: number,
   last_message_option: number,
@@ -34,7 +48,7 @@ export class ChatApi {
 
   @Get({ url: '/api/v2/sellerchat/get_message' })
   getMessage!: ApiShopMethod<
-    { offset?: string; page_size?: number, conversation_id: number },
+    { offset?: string; page_size?: number, conversation_id: BigInt },
     {
       response: {
         messages: {
@@ -42,7 +56,7 @@ export class ChatApi {
           from_shop_id: number, to_id: number, to_shop_id: number,
           conversation_id: string, created_timestamp: number,
           region: string, status: string, source: string,
-          content: { text: string }, message_option: number,
+          content: MessageContent, message_option: number,
           source_content: {
             order_sn: string,
             item_id: number
@@ -105,13 +119,13 @@ export class ChatApi {
 
   @Get({ url: '/api/v2/sellerchat/get_one_conversation' })
   getOneConversation!: ApiShopMethod<
-    { conversation_id: number },
+    { conversation_id: BigInt },
     { response: Conversation }
   >
 
   @Post({ url: '/api/v2/sellerchat/delete_conversation' })
   deleteConversation!: ApiShopMethod<
-    { conversation_id: number },
+    { conversation_id: BigInt },
     { response: {} }
   >
 
@@ -124,25 +138,25 @@ export class ChatApi {
 
   @Post({ url: '/api/v2/sellerchat/pin_conversation' })
   pinConversation!: ApiShopMethod<
-    { conversation_id: number },
+    { conversation_id: BigInt },
     { response: {} }
   >
 
   @Post({ url: '/api/v2/sellerchat/unpin_conversation' })
   unpinConversation!: ApiShopMethod<
-    { conversation_id: number },
+    { conversation_id: BigInt },
     { response: {} }
   >
 
   @Post({ url: '/api/v2/sellerchat/read_conversation' })
   readConversation!: ApiShopMethod<
-    { conversation_id: number, last_read_message_id: string },
+    { conversation_id: BigInt, last_read_message_id: string },
     { response: {} }
   >
 
   @Post({ url: '/api/v2/sellerchat/unread_conversation' })
   unreadConversation!: ApiShopMethod<
-    { conversation_id: number },
+    { conversation_id: BigInt },
     { response: {} }
   >
 
@@ -186,9 +200,7 @@ export class ChatApi {
         message_id: string,
         to_id: number,
         message_type: string,
-        content: {
-          text: string
-        },
+        content: MessageContent,
         conversation_id: number,
         created_timestamp: number,
         message_option: number,

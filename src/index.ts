@@ -2,7 +2,7 @@
  * @Author: Monve
  * @Date: 2022-03-10 11:46:01
  * @LastEditors: Monve
- * @LastEditTime: 2022-06-15 17:26:24
+ * @LastEditTime: 2022-06-23 18:56:33
  * @FilePath: /shopee-openapi-v2/src/index.ts
  */
 
@@ -78,6 +78,8 @@ class ShopeeOpenApi {
         const { access_token, shop_id } = data
         delete config.params?.access_token
         delete config.params?.shop_id
+        config.params = toJson(config.params)
+        config.data = toJson(config.data)
         config.url = this.generateParamsString(config.url || '', timestamp, access_token, shop_id)
         return config
       },
@@ -160,6 +162,14 @@ class ShopeeOpenApi {
     }
   >
 
+}
+
+function toJson(data: any) {
+  if (data !== undefined) {
+    return JSON.stringify(data, (_, v) => typeof v === 'bigint' ? `${v}n` : v)
+      .replace(/"(-?\d+)n"/g, (_, a) => a);
+  }
+  return data
 }
 
 export default new ShopeeOpenApi()
