@@ -2,7 +2,7 @@
  * @Author: Monve
  * @Date: 2022-06-07 19:50:52
  * @LastEditors: Monve
- * @LastEditTime: 2022-06-08 14:07:39
+ * @LastEditTime: 2022-07-04 17:28:37
  * @FilePath: /shopee-openapi-v2/src/order.ts
  */
 
@@ -19,7 +19,7 @@ export class OrderApi {
   >
 
   @Get({ url: '/api/v2/order/get_order_list' })
-  get_order_list!: ApiShopMethod<
+  getOrderList!: ApiShopMethod<
     {
       time_range_field: string, time_from: number,
       time_to: number, page_size: number, cursor?: string,
