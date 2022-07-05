@@ -2,7 +2,7 @@
  * @Author: Monve
  * @Date: 2022-06-02 10:28:39
  * @LastEditors: Monve
- * @LastEditTime: 2022-06-23 18:45:45
+ * @LastEditTime: 2022-07-05 18:41:13
  * @FilePath: /shopee-openapi-v2/src/chat.ts
  */
 
@@ -73,7 +73,7 @@ export class ChatApi {
       to_id: number, message_type: 'text' | 'sticker' | 'image' | 'item' | 'order',
       content: {
         text?: string,
-        stick_id?: string,
+        sticker_id?: string,
         sticker_package_id?: string,
         image_url?: string,
         item_id?: number,
