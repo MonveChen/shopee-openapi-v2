@@ -2,7 +2,7 @@
  * @Author: Monve
  * @Date: 2022-06-02 10:28:39
  * @LastEditors: Monve
- * @LastEditTime: 2022-07-05 18:41:13
+ * @LastEditTime: 2022-07-06 17:25:22
  * @FilePath: /shopee-openapi-v2/src/chat.ts
  */
 
@@ -67,7 +67,15 @@ export class ChatApi {
     }
   >
 
-  @Post({ url: '/api/v2/sellerchat/send_message' })
+  @Post({
+    url: '/api/v2/sellerchat/send_message',
+    transformResponse: [
+      data => {
+        const res = data.replace(/\"conversation_id\":(\d+)/g, '"conversation_id":"$1"')
+        return JSON.parse(res)
+      },
+    ]
+  })
   sendMessage!: ApiShopMethod<
     {
       to_id: number, message_type: 'text' | 'sticker' | 'image' | 'item' | 'order',
