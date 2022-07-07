@@ -2,6 +2,8 @@
 
 A shopee openapi sdk, currently there is only sdk about im part
 
+[![OSCS Status](https://www.oscs1024.com/platform/badge/MonveChen/shopee-openapi-v2.svg?size=small)](https://www.oscs1024.com/project/MonveChen/shopee-openapi-v2?ref=badge_small)
+
 #### Usage
 
 ```typescript
