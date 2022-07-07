@@ -2,13 +2,13 @@
  * @Author: Monve
  * @Date: 2022-06-07 19:50:52
  * @LastEditors: Monve
- * @LastEditTime: 2022-07-04 17:28:37
+ * @LastEditTime: 2022-07-07 17:32:05
  * @FilePath: /shopee-openapi-v2/src/order.ts
  */
 
 import { ApiShopMethod, Get, Post } from "./utils/request"
 
-type OrderStatus = 'UNPAID' | 'READY_TO_SHIP' | 'PROCESSED' | 'SHIPPED' | 'COMPLETED' | 'IN_CANCEL' | 'CANCELLED' | 'INVOICE_PENDING'
+export type OrderStatus = 'UNPAID' | 'READY_TO_SHIP' | 'PROCESSED' | 'SHIPPED' | 'COMPLETED' | 'IN_CANCEL' | 'CANCELLED' | 'INVOICE_PENDING'
 
 export class OrderApi {
 
