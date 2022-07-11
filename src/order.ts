@@ -2,7 +2,7 @@
  * @Author: Monve
  * @Date: 2022-06-07 19:50:52
  * @LastEditors: Monve
- * @LastEditTime: 2022-07-07 17:32:05
+ * @LastEditTime: 2022-07-11 16:04:12
  * @FilePath: /shopee-openapi-v2/src/order.ts
  */
 
@@ -55,7 +55,7 @@ export class OrderApi {
           currency: string,
           cod: boolean,
           total_amount: number,
-          order_status: string,
+          order_status: OrderStatus,
           shipping_carrier: string,
           payment_method: string,
           estimated_shipping_fee: number,
