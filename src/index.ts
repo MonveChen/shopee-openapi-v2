@@ -2,7 +2,7 @@
  * @Author: Monve
  * @Date: 2022-03-10 11:46:01
  * @LastEditors: Monve
- * @LastEditTime: 2022-07-11 19:27:20
+ * @LastEditTime: 2022-07-12 16:02:44
  * @FilePath: /shopee-openapi-v2/src/index.ts
  */
 
@@ -76,13 +76,15 @@ class ShopeeOpenApi {
         }
         const { timestamp } = system_params
         const { access_token, shop_id } = data
-        delete config.params?.access_token
-        delete config.params?.shop_id
-        Object.keys(config.params).map((key) => {
-          if (Array.isArray(config.params[key])) {
-            config.params[key] = config.params[key].join(',')
-          }
-        })
+        if (config.params) {
+          delete config.params.access_token
+          delete config.params.shop_id
+          Object.keys(config.params).map((key) => {
+            if (Array.isArray(config.params[key])) {
+              config.params[key] = config.params[key].join(',')
+            }
+          })
+        }
         config.data = toJson(config.data)
         config.url = this.generateParamsString(config.url || '', timestamp, access_token, shop_id)
         return config
