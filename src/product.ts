@@ -2,7 +2,7 @@
  * @Author: Monve
  * @Date: 2022-06-07 19:49:42
  * @LastEditors: Monve
- * @LastEditTime: 2022-07-22 18:05:13
+ * @LastEditTime: 2022-07-22 18:06:30
  * @FilePath: /shopee-openapi-v2/src/product.ts
  */
 
@@ -25,7 +25,7 @@ export class ProductApi {
           category_id: number,
           item_name: string,
           description?: string,
-          description_type: string,
+          description_type: string,  //官方文档缺少，但实际有
           item_sku: string,
           create_time: number,
           update_time: number,
