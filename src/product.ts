@@ -2,7 +2,7 @@
  * @Author: Monve
  * @Date: 2022-06-07 19:49:42
  * @LastEditors: Monve
- * @LastEditTime: 2022-07-22 17:28:16
+ * @LastEditTime: 2022-07-22 18:05:13
  * @FilePath: /shopee-openapi-v2/src/product.ts
  */
 
@@ -24,7 +24,8 @@ export class ProductApi {
           item_id: number,
           category_id: number,
           item_name: string,
-          description: string,
+          description?: string,
+          description_type: string,
           item_sku: string,
           create_time: number,
           update_time: number,
@@ -47,7 +48,7 @@ export class ProductApi {
             sip_item_price: number,
             sip_item_price_source: string,
           }[],
-          stock_info: {
+          stock_info?: {
             stock_type: number,
             stock_location_id: string,
             current_stock: number,
@@ -116,7 +117,7 @@ export class ProductApi {
             hs_code: string,
             tax_code: string
           },
-          stock_info_v2: {
+          stock_info_v2?: {
             summary_info: {
               total_reserved_stock: number,
               total_available_stock: number
@@ -131,7 +132,7 @@ export class ProductApi {
             }
           }
         }[],
-        description_info: {
+        description_info?: {
           extended_description: {
             field_list: {
               field_type: string,
@@ -143,7 +144,7 @@ export class ProductApi {
             }[]
           }
         },
-        description_type: string
+        description_type?: string
       }
     }
   >
