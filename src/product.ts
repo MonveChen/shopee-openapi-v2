@@ -2,7 +2,7 @@
  * @Author: Monve
  * @Date: 2022-06-07 19:49:42
  * @LastEditors: Monve
- * @LastEditTime: 2022-07-22 18:06:30
+ * @LastEditTime: 2022-07-22 18:54:40
  * @FilePath: /shopee-openapi-v2/src/product.ts
  */
 
@@ -187,7 +187,7 @@ export class ProductApi {
     {
       warning: string,
       response: {
-        item: {
+        item?: {
           item_id: number,
           item_status: string,
           update_time: number
