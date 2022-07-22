@@ -1,6 +1,6 @@
 {
   "name": "shopee-openapi-v2",
-  "version": "1.0.29",
+  "version": "1.0.30",
   "description": "shopee open api sdk",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

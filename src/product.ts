@@ -2,7 +2,7 @@
  * @Author: Monve
  * @Date: 2022-06-07 19:49:42
  * @LastEditors: Monve
- * @LastEditTime: 2022-07-22 15:26:31
+ * @LastEditTime: 2022-07-22 17:28:16
  * @FilePath: /shopee-openapi-v2/src/product.ts
  */
 
@@ -166,7 +166,17 @@ export class ProductApi {
     }
   >
 
-  @Get({ url: '/api/v2/product/get_item_list' })
+  @Get({
+    url: '/api/v2/product/get_item_list',
+    paramsSerializer: (params) => {
+      return Object.keys(params).map((key) => {
+        if (key === 'item_status') {
+          return (params[key] as string).split(',').map((statu) => `item_status=${statu}`).join('&')
+        }
+        return `${key}=${params[key]}`
+      }).join('&')
+    }
+  })
   getItemList!: ApiShopMethod<
     {
       offset: number, page_size: number,
