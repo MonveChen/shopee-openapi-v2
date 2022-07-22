@@ -206,7 +206,7 @@ export class ProductApi {
         }[],
         model: {
           price_info: {
-            currency: number,
+            currency: string,
             current_price: number,
             original_price: number,
             inflated_price_of_original_price: number,
