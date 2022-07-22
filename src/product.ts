@@ -2,7 +2,7 @@
  * @Author: Monve
  * @Date: 2022-06-07 19:49:42
  * @LastEditors: Monve
- * @LastEditTime: 2022-07-22 15:11:36
+ * @LastEditTime: 2022-07-22 15:26:31
  * @FilePath: /shopee-openapi-v2/src/product.ts
  */
 
@@ -213,7 +213,7 @@ export class ProductApi {
             inflated_price_of_current_price: number,
             sip_item_price: number,
             sip_item_price_source: string
-          },
+          }[],
           model_id: number,
           stock_info: {
             normal_stock: number,
