@@ -2,7 +2,7 @@
  * @Author: Monve
  * @Date: 2022-06-07 19:49:42
  * @LastEditors: Monve
- * @LastEditTime: 2022-06-08 15:58:17
+ * @LastEditTime: 2022-07-22 14:47:38
  * @FilePath: /shopee-openapi-v2/src/product.ts
  */
 
@@ -242,7 +242,7 @@ export class ProductApi {
               stock: number
             }[]
           }
-        }
+        }[]
       }
     }
   >
