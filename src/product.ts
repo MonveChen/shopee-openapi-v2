@@ -2,7 +2,7 @@
  * @Author: Monve
  * @Date: 2022-06-07 19:49:42
  * @LastEditors: Monve
- * @LastEditTime: 2022-07-22 14:47:38
+ * @LastEditTime: 2022-07-22 15:11:36
  * @FilePath: /shopee-openapi-v2/src/product.ts
  */
 
@@ -206,6 +206,7 @@ export class ProductApi {
         }[],
         model: {
           price_info: {
+            currency: number,
             current_price: number,
             original_price: number,
             inflated_price_of_original_price: number,
