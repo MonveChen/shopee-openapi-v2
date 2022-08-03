@@ -2,7 +2,7 @@
  * @Author: Monve
  * @Date: 2022-06-07 19:53:39
  * @LastEditors: Monve
- * @LastEditTime: 2022-06-08 10:13:12
+ * @LastEditTime: 2022-08-03 16:37:31
  * @FilePath: /shopee-openapi-v2/src/voucher.ts
  */
 
@@ -12,7 +12,7 @@ import { ApiShopMethod, Get } from "./utils/request"
 export class VoucherApi {
 
   @Get({ url: '/api/v2/voucher/get_voucher_list' })
-  getShopInfo!: ApiShopMethod<
+  getVoucherList!: ApiShopMethod<
     {
       page_no?: number, page_size?: number,
       status: 'upcoming' | 'ongoing' | 'expired' | 'all'
