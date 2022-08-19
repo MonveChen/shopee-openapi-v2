@@ -2,7 +2,7 @@
  * @Author: Monve
  * @Date: 2022-06-02 10:28:39
  * @LastEditors: Monve
- * @LastEditTime: 2022-08-19 17:42:33
+ * @LastEditTime: 2022-08-19 18:05:30
  * @FilePath: /shopee-openapi-v2/src/chat.ts
  */
 
@@ -200,7 +200,15 @@ export class ChatApi {
     }
   } & BaseRes>>;
 
-  @Post({ url: '/api/v2/sellerchat/send_autoreply_message' })
+  @Post({
+    url: '/api/v2/sellerchat/send_autoreply_message',
+    transformResponse: [
+      data => {
+        const res = data.replace(/\"conversation_id\":(\d+)/g, '"conversation_id":"$1"')
+        return JSON.parse(res)
+      },
+    ]
+  })
   sendAutoreplyMessage!: ApiShopMethod<
     {
       to_id: number,
