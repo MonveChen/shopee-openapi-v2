@@ -2,7 +2,7 @@
  * @Author: Monve
  * @Date: 2022-06-02 10:28:39
  * @LastEditors: Monve
- * @LastEditTime: 2022-07-06 17:25:22
+ * @LastEditTime: 2022-08-19 17:42:33
  * @FilePath: /shopee-openapi-v2/src/chat.ts
  */
 
@@ -11,7 +11,14 @@ import * as FormData from 'form-data'
 import { AxiosResponse } from "axios"
 
 export type MessageContent = {
-  text: string,
+  text?: string,
+  sticker_package_id?: string,
+  sticker_id?: string,
+  url?: string,
+  video_url?: string
+  thumb_url?: string,
+  order_sn?: string,
+  item_id?: number,
   translation?: {
     text: string,
     source: string,
@@ -90,9 +97,7 @@ export class ChatApi {
     },
     {
       response: {
-        content: {
-          text: string
-        }
+        content: MessageContent,
         region: string,
         to_id: number,
         created_timestamp: number,
@@ -208,7 +213,7 @@ export class ChatApi {
         message_id: string,
         to_id: number,
         message_type: string,
-        content: MessageContent,
+        content: { text: string },
         conversation_id: number,
         created_timestamp: number,
         message_option: number,
