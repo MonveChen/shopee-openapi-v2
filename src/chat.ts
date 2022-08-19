@@ -2,7 +2,7 @@
  * @Author: Monve
  * @Date: 2022-06-02 10:28:39
  * @LastEditors: Monve
- * @LastEditTime: 2022-08-19 18:05:30
+ * @LastEditTime: 2022-08-19 18:17:05
  * @FilePath: /shopee-openapi-v2/src/chat.ts
  */
 
@@ -222,7 +222,7 @@ export class ChatApi {
         to_id: number,
         message_type: string,
         content: { text: string },
-        conversation_id: number,
+        conversation_id: string,
         created_timestamp: number,
         message_option: number,
         source_content: {}
