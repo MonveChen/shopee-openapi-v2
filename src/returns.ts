@@ -2,7 +2,7 @@
  * @Author: Monve
  * @Date: 2022-06-07 19:51:00
  * @LastEditors: Monve
- * @LastEditTime: 2022-06-08 16:03:44
+ * @LastEditTime: 2022-11-10 18:51:25
  * @FilePath: /shopee-openapi-v2/src/returns.ts
  */
 import { ApiShopMethod, Get, Post } from "./utils/request"
@@ -21,7 +21,7 @@ export class ReturnsApi {
     {
       response: {
         more: boolean,
-        returns: {
+        return: {
           image: string[],
           reason: string,
           text_reason: string,
