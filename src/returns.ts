@@ -2,7 +2,7 @@
  * @Author: Monve
  * @Date: 2022-06-07 19:51:00
  * @LastEditors: Monve
- * @LastEditTime: 2022-11-10 18:51:25
+ * @LastEditTime: 2022-11-10 19:05:23
  * @FilePath: /shopee-openapi-v2/src/returns.ts
  */
 import { ApiShopMethod, Get, Post } from "./utils/request"
@@ -25,7 +25,7 @@ export class ReturnsApi {
           image: string[],
           reason: string,
           text_reason: string,
-          return_sn: number,
+          return_sn: string,
           refund_amount: number,
           currency: string,
           create_time: number,
